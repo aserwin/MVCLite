@@ -7,10 +7,13 @@
  */
 function setReporting()
 {
-    if (DEVELOPMENT_ENVIRONMENT == true) {
+    if (DEVELOPMENT_ENVIRONMENT == true)
+    {
         error_reporting(E_ALL);
         ini_set('display_errors', 'On');
-    } else {
+    }
+    else
+    {
         error_reporting(E_ALL);
         ini_set('display_errors', 'Off');
         ini_set('log_errors', 'On');
@@ -46,7 +49,8 @@ function removeMagicQuotes()
  */
 function unregisterGlobals()
 {
-    if (ini_get('register_globals')) {
+    if (ini_get('register_globals')) 
+    {
         $array = [
             '_SESSION',
             '_POST',
@@ -57,8 +61,11 @@ function unregisterGlobals()
             '_ENV',
             '_FILES'
         ];
-        foreach ($array as $value) {
-            foreach ($GLOBALS[$value] as $key => $var) {
+        
+        foreach ($array as $value) 
+        {
+            foreach ($GLOBALS[$value] as $key => $var) 
+            {
                 if ($var === $GLOBALS[$key])
                     unset($GLOBALS[$key]);
             }
@@ -92,7 +99,8 @@ function callProgram()
             $dispatch,
             $action
         ], $query);
-    else {
+    else 
+    {
     /**
      * generate error code
      */
@@ -107,7 +115,8 @@ function __autoload($className)
         require_once (ROOT . DS . 'app' . DS . 'controllers' . DS . strtolower($className) . '.php');
     elseif (file_exists(ROOT . DS . 'app' . DS . 'models' . DS . strtolower($className) . '.php'))
         require_once (ROOT . DS . 'app' . DS . 'controllers' . DS . strtolower($className) . '.php');
-    else {
+    else 
+    {
     /**
      * generate error code
      */
