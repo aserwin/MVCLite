@@ -33,25 +33,30 @@ class SQLQuery
     {
         $this->_result = mysql_query($query, $this->_dbHandle);
         
-        if (preg_match('/select/i', $query)) {
+        if (preg_match('/select/i', $query)) 
+        {
             $result = [];
             $table = [];
             $field = [];
             $temp = [];
             $fieldcount = mysql_num_fields($this->_result);
             
-            for ($i = 0; $i < $fieldcount; ++ $i) {
+            for ($i = 0; $i < $fieldcount; ++ $i) 
+            {
                 array_push($table, mysql_field_table($this->_result, $i));
                 array_push($table, mysql_field_name($this->_result, $i));
             }
             
-            while ($row = mysql_fetch_row($this->_result)) {
-                for ($i = 0; $i < $fieldcount; ++ $i) {
+            while ($row = mysql_fetch_row($this->_result)) 
+            {
+                for ($i = 0; $i < $fieldcount; ++ $i) 
+                {
                     $table[$i] = trim(ucfirst($table[$i]), 's');
                     $temp[$table[$i]][$field[$i]] = $row[$i];
                 }
                 
-                if ($singleResult == 1) {
+                if ($singleResult == 1) 
+                {
                     mysql_free_result($this->_result);
                     return $temp;
                 }
